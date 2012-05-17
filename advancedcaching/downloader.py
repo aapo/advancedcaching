@@ -130,7 +130,11 @@ class FileDownloader():
         if resp.info().get('Content-Encoding') == 'gzip':
             from StringIO import StringIO
             import gzip
-            buf = StringIO(resp.read())
+            try:
+                buf = StringIO(resp.read())
+            except socket.timeout:
+                print "Timeout raised and caught, skip this loading and move on"
+                return ""
             logger.debug("Got gzip encoded answer")
             return gzip.GzipFile(fileobj=buf)
         else:

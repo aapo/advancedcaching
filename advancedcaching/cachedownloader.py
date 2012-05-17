@@ -417,7 +417,7 @@ class GeocachingComCacheDownloader(CacheDownloader):
             if s.startswith('//<![CDATA[\r\nvar uvtoken'):
                 userToken = re.sub("(?s).*userToken = '", '', s)
                 userToken = re.sub("(?s)'.*", '', userToken)
-                print "userToken:", userToken
+                #print "userToken:", userToken
 
 
         def generate_request(userToken,pageNumber):
@@ -847,7 +847,7 @@ class GeocachingComCacheDownloader(CacheDownloader):
         if returnTotalPages is True:
             pageinfo = r['pageInfo']
             total_page = pageinfo['totalPages']
-            print "total pages", total_page
+            #print "total pages", total_page
             return output,total_page
         
 

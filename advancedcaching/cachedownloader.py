@@ -659,6 +659,19 @@ class GeocachingComCacheDownloader(CacheDownloader):
         else:
           logger.info("Attributes not found!")
 
+        #print "   Start looking for trackables"
+        if len(doc.cssselect('#Content .sortables .item-content'))>6:
+          try:
+            for div in doc.cssselect('#Content .sortables .item-content')[6].cssselect('div.item-content'):
+                name_of_item = div.text_content().strip()
+                if name_of_item!='':
+                    #TODO: store it somewhere
+                    print("   Trackable: '"+ name_of_item +"'")
+          except Exception, e:
+            logger.error("Problems with downloading trackables")
+
+        #print "   Over: looking for trackables"
+
         # Extract description...
         try:
             desc = doc.cssselect('#Content .sortables .item-content')[2]

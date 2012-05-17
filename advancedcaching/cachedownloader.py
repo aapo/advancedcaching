@@ -518,6 +518,9 @@ class GeocachingComCacheDownloader(CacheDownloader):
                 # Download file
                 try:
                     f = open(filename, 'wb')
+                    #Some images (e.g. smileys) have relative paths
+                    if url.startswith("../"):
+                       url = "http://www.geocaching.com/"+url[3:]
                     f.write(self.downloader.get_reader(url, login = False).read())
                     f.close()
                 except Exception, e:
